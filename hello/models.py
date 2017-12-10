@@ -36,10 +36,11 @@ class Profile(object):
 
 
 class UserProfile(Profile):
-    pass
-
-class UserProfileDao(UserProfile):
-    def storeInfo(self):
+    def enableDao(self):
+        setattr(self,'dao',UserProfileDao())
+    
+class BaseDao(object):
+    def initiateConn(self):
         urllib.parse.uses_netloc.append("postgres")
         url = urllib.parse.urlparse('postgres://ctomdacurckzmh:9296e40a59aacf97c93020e5f0b77e565f6e6f2cf9c0ec00a663b983216711d3@ec2-184-72-245-58.compute-1.amazonaws.com:5432/df0ehsr6unrr28')
         
@@ -51,53 +52,64 @@ class UserProfileDao(UserProfile):
             port=url.port
             )
         cur = conn.cursor()
-        #store all info for tblUser
-        queryCol= '"Admin", "Developer",'
-        queryVal = "1, 1, "
+        setattr(self,'conn',conn)
+        setattr(self,'cur',cur)
+    def commit(self):
+        self.conn.commit()
+    def close(self):
+        self.cur.close()
         
-        for attribute in self.__dict__:
-            if attribute != 'profileInfo':
-                queryCol += '"' + attribute + '",'
-                if attribute == 'ChurchID':
-                    queryVal += self.__dict__[attribute] + ","
-                else:
-                    queryVal += ("'" + self.__dict__[attribute] + "',")
 
-        userQuery = ('Insert INTO "tblUser" ({0}) values ({1})'.format(queryCol[:-1],
-                     queryVal[:-2]))
-        cur.execute(userQuery)
-        conn.commit()
+class UserProfileDao(BaseDao):
+    def storeInfo(self, userDict):
+        #store all info for tblUser
+        #userDict = sampleUser.__dict__
+        queryCol= 'Insert INTO "tblUser" ("Admin","Developer",'
+        queryVal = ['1', '1']
+        attributeExcluded = ['profileInfo', 'dao']
+        for attribute in userDict:
+            if attribute not in attributeExcluded:
+                queryCol += '"' + attribute + '",'
+                if attribute.find('ID') > -1:
+                    userDict[attribute] = userDict[attribute][:-1]
+                queryVal.append(userDict[attribute])
+        
+        queryCol = queryCol[:-1] + ') values %s'
+        self.cur.execute(queryCol,
+                            (tuple(queryVal),))
+
     
 class ChurchProfile(Profile):
-    def storeInfo(self): 
+    def enableDao(self):
+        setattr(self,'dao',UserProfileDao())
+    
+class ChurchProfileDao(BaseDao):
+    def storeInfo(self, userDict):
         #store all info for tblUser
-        queryColumns = {'church' : ""}
-        queryValues = {'church' : ""}
+        #userDict = sampleUser.__dict__
+        queryCol= 'Insert INTO "tblChurch" ('
+        queryVal = []
+        attributeExcluded = ['profileInfo', 'dao']
+        for attribute in userDict:
+            if attribute not in attributeExcluded:
+                queryCol += '"' + attribute + '",'
+                if attribute.find('ID') > -1:
+                    userDict[attribute] = userDict[attribute][:-1]
+                queryVal.append(userDict[attribute])
         
-        for attribute in self.__dict__:
-            if attribute != 'profileInfo':
-                queryColumns['church'] += '"' + attribute + '", '
-                queryValues['church'] += ("\'" + self.__dict__[attribute] + "\', ")
-
-        churchQuery = ('Insert INTO "tblUser" ({0}) values ({1})'.format(queryColumns['church'],
-                     queryValues['church']))
-        return churchQuery
-    def getChurchID(self):
-        pass
-    def updateChurchInfo(self):
-        pass
-
-class ProfileDao(object):
-    pass
-        
+        queryCol = queryCol[:-1] + ') values %s'
+        self.cur.execute(queryCol,
+                            (tuple(queryVal),))    
     
 
 def testMain():
     sampleUser = 'FirstName=djangotest&LastName=123&ID=jaewonrt&Pass=remnant&Email=jaewonrt@gmail.com'
     sampleUser = UserProfile(sampleUser)
     sampleUser.updateInfo()
-    UserProfileDao.storeInfo(sampleUser)
-    return sampleUser
+    sampleUser.enableDao()
+    sampleUser.dao.initiateConn()
+    sampleUser.dao.storeInfo(sampleUser.__dict__)
+    sampleUser.dao.close()
 
             
         

@@ -14,8 +14,13 @@ def log_in(request):
 def sign_up(userInfo):
     sampleUser = UserProfile(userInfo.body)
     sampleUser.updateInfo()
-    UserProfileDao.storeInfo(sampleUser)
+    sampleUser.enableDao()
+    sampleUser.dao.initiateConn()
+    sampleUser.dao.storeInfo(sampleUser.__dict__)
+    sampleUser.dao.commit()
+    sampleUser.dao.close()
     return HttpResponse('user created successfully')
+
 
  #   greeting = Greeting()
   #  greeting.save()
