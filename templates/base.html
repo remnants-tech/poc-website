@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Remnant Ministry</title>
+  <link rel="stylesheet" type="text/css" href="/static/base.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>
+<img src = "/static/remnant ministry.jpg" alt = "remnant ministry logo" style="float:left;width:275px;height:175px;">
+</h1>
+<button id="log-in_button"><a id="log-in_link" href="/log-in.html"> log in </a> </button>
+<button id="feedback_button"> contact us </button>
+<br>
+<div id="menu_bar">
+  <ul id="menu_list">
+    <li><a id="menu_list" href=#>About</a></li>
+    <li><a id="menu_list" href=#>News</a></li>
+    <li><a id="menu_list" href=#>Church Lookup</a></li>
+    <li><a id="menu_list" href=#>Resources</a></li>
+    <li><a id="menu_list" href=#>Sample</a></li>
+  </ul>
+</div>
+<br>
+<div class="content_container">
+  {% block content %}
+  {% endblock %}
+</div>
+</body>
+</html>
