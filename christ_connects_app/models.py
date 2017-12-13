@@ -64,6 +64,10 @@ class BaseDao(object):
         cur = conn.cursor()
         setattr(self,'conn',conn)
         setattr(self,'cur',cur)
+    def pullAllInfo(self,tblName):
+        self.cur.execute('select * from %s',(tblName,))
+        return self.cur.fetchAll()
+        
     def commit(self):
         self.conn.commit()
     def close(self):
@@ -74,7 +78,7 @@ class UserProfileDao(BaseDao):
     def storeInfo(self, userDict):
         #store all info for tblUser
         #userDict = sampleUser.__dict__
-        queryCol= 'Insert INTO "tblUser" ("Admin","Developer",'
+        queryCol= 'Insert INTO tbluser ("Admin","Developer",'
         queryVal = ['1', '1']
         attributeExcluded = ['profileInfo', 'dao']
         for attribute in userDict:
@@ -87,6 +91,9 @@ class UserProfileDao(BaseDao):
         queryCol = queryCol[:-1] + ') values %s'
         self.cur.execute(queryCol,
                             (tuple(queryVal),))
+    
+    def pullAllInfo(self):
+        
 
     
 class ChurchProfile(Profile):
@@ -97,7 +104,7 @@ class ChurchProfileDao(BaseDao):
     def storeInfo(self, userDict):
         #store all info for tblUser
         #userDict = sampleUser.__dict__
-        queryCol= 'Insert INTO "tblChurch" ('
+        queryCol= 'Insert INTO "tblchurch" ('
         queryVal = []
         attributeExcluded = ['profileInfo', 'dao']
         for attribute in userDict:
