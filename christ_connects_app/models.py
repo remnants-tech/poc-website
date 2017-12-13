@@ -93,6 +93,7 @@ class UserProfileDao(BaseDao):
                             (tuple(queryVal),))
     
     def pullAllInfo(self):
+        pass
         
 
     
