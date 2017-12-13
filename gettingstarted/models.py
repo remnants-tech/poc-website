@@ -100,6 +100,7 @@ class ChurchProfileDao(BaseDao):
         queryCol = queryCol[:-1] + ') values %s'
         self.cur.execute(queryCol,
                             (tuple(queryVal),))    
+
     
 
 def testMain():
