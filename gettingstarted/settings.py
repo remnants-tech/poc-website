@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'christ_connects_app'
+    'app'
 )
 
 MIDDLEWARE_CLASSES = (
