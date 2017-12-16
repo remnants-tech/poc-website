@@ -1,0 +1,44 @@
+.form_container1 {
+  margin: auto;
+  width: 70%;
+  height: 80%;
+  background-color: #fff6e5;
+}
+
+.form_container2 {
+  margin: auto;
+  width: 95%;
+  height: 80%;
+  background-color: #fff;
+}
+
+#user_sign_fm {
+}
+
+
+input[type=text], input[type=password] {
+    width: 80%;
+    padding: 10px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+select {
+  padding: 8px 25px;
+  margin: 8px 0;
+  display: inline-block;;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+#name_input {
+  width: 40%;
+  margin: 2px 0;
+}
+
+#pg_title {
+  font-family: verdana;
+  font-size: 20px;
+}
