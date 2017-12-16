@@ -1,6 +1,21 @@
-/* Full-width input fields */
+.form_container1 {
+  margin: auto;
+  width: 70%;
+  height: 80%;
+  background-color: #fff6e5;
+}
+
+.form_container2 {
+  margin: auto;
+  background-color: #fff;
+}
+
+#user_sign_fm {
+}
+
+
 input[type=text], input[type=password] {
-    width: 50%;
+    width: 80%;
     padding: 10px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -17,6 +32,14 @@ select {
 }
 
 #name_input {
-  width: 25%;
+  width: 40%;
   margin: 2px 0;
+}
+
+#pg_title {
+  margin: auto;
+  width: 70%;
+  font-family: verdana;
+  font-size: 20px;
+  padding-bottom: 10px;
 }

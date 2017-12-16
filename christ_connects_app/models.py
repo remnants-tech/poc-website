@@ -64,14 +64,23 @@ class BaseDao(object):
         cur = conn.cursor()
         setattr(self,'conn',conn)
         setattr(self,'cur',cur)
-    def pullAllInfo(self,tblName):
-        self.cur.execute('select * from %s',(tblName,))
-        return self.cur.fetchAll()
+    
+    def resultAsDict(self,cur):
+        cols = [col[0] for col in cur.description]
+        results = cur.fetchall()
+        processedDict = {}
+        for colName in cols:
+            processedDict[colName] = []
+            for count,row in enumerate(results):
+                processedDict[colName].append(row[count])
+        return processedDict
         
     def commit(self):
         self.conn.commit()
     def close(self):
         self.cur.close()
+    def rollBack(self):
+        self.cur.rollback()
         
 
 class UserProfileDao(BaseDao):
@@ -91,12 +100,24 @@ class UserProfileDao(BaseDao):
         queryCol = queryCol[:-1] + ') values %s'
         self.cur.execute(queryCol,
                             (tuple(queryVal),))
-    
-    def pullAllInfo(self):
-        pass
         
-
+    def pullIds(self):
+        self.cur.execute('select * from tbluser')
+        id_list = [userId[0] for userId in self.cur.fetchall()]
+        return id_list
     
+    def checkDuplicate(self, column, value):
+        query = ('select count(' + '"' + column +'"' + ') from tbluser where '
+                 'tbluser."' + column + '"=  %s')
+        self.cur.execute(query,(value,))
+        if (self.cur.fetchall()[0][0] > 0):
+            return True
+        else:
+            return False
+    
+    
+
+
 class ChurchProfile(Profile):
     def enableDao(self):
         setattr(self,'dao',UserProfileDao())
@@ -118,6 +139,12 @@ class ChurchProfileDao(BaseDao):
         queryCol = queryCol[:-1] + ') values %s'
         self.cur.execute(queryCol,
                             (tuple(queryVal),))    
+    def pullChurchName(self):
+        self.cur.execute('select church_pk, name from tblchurch')
+        name_list = [{row[0]:row[1]} for row in self.cur.fetchall()]
+        return name_list
+
+    
 
     
 
