@@ -15,6 +15,7 @@ urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
     url(r'^log-in', christ_connects_app.views.log_in, name='log-in'),
     url(r'^sign_up',christ_connects_app.views.sign_up, name='sign_up'),
-    url(r'^pull_churches',christ_connects_app.views.pull_churches, name='pull_churches')
+    url(r'^pull_churches',christ_connects_app.views.pull_churches, name='pull_churches'),
+    url(r'^account_confirm',christ_connects_app.views.account_confirm, name='account_confirm')
 ]
 

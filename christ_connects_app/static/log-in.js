@@ -7,7 +7,20 @@ var pass_ids = document.querySelectorAll("#pass, #pass_repeat")
 var error_msg_id = document.getElementById("error_msg")
 var sign_btn_id = document.getElementById("sign-up_btn")
 var cancel_btn_id = document.getElementById("cancel_btn")
-var user_fm_id = document.getElementById("user_sign_fm")
+var username_msg_id = document.getElementById("user_id_msg")
+var email_msg_id = document.getElementById("email_msg")
+var user_fm_id = document.getElementsByClassName("signupForm")
+var sign_up_callback = (data) => {
+  if (data ==="Username already exists"){
+    $(username_msg_id).text(data)
+  }
+  else if (data === "Email already exists"){
+    $(email_msg_id).text(data)
+  }
+  else {
+    window.location.href="account_confirm"
+  }
+};
 
 $(pass_ids).keyup(function(event){
   pass_input = $(pass_id).val();
@@ -24,7 +37,7 @@ $(pass_ids).keyup(function(event){
 });
 
 
-$(sign_btn_id).click(function(event){
+$(sign_btn_id).on("click", function(event){
   //this is making sure pass is at least 8 characters long
   if (pass_input.length < 8) {
     $(pass_error_id).css({'color': 'red'})
@@ -35,6 +48,11 @@ $(sign_btn_id).click(function(event){
     $(pass_error_id).text("please check your information");
   }
   else {
-    $(user_fm_id).submit()
+      $.ajax({
+        url:"/sign_up",
+        type:"POST",
+        data: $(user_fm_id).serialize(),
+        success: sign_up_callback
+      })
   };
 });

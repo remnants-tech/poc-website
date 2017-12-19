@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response, redirect
 from django.http import HttpResponse
 import json
 from .models import UserProfile,UserProfileDao,ChurchProfileDao
@@ -17,13 +17,13 @@ def sign_up(userInfo):
     sampleUser.enableDao()
     sampleUser.dao.initiateConn()
     if (sampleUser.dao.checkDuplicate("ID",sampleUser.ID)):
-        return HttpResponse('ID already exists')
+        return HttpResponse('Username already exists')
     if (sampleUser.dao.checkDuplicate("Email",sampleUser.Email)):
         return HttpResponse('Email already exists')
     sampleUser.dao.storeInfo(sampleUser.__dict__)
     sampleUser.dao.commit()
     sampleUser.dao.close()
-    return HttpResponse('user created successfully')
+    return HttpResponse('User successfully created')
 
 def pull_churches(request):
     churchDao = ChurchProfileDao()
@@ -33,6 +33,9 @@ def pull_churches(request):
     return HttpResponse((churchNames))
     
 
+def account_confirm(request):
+    return render(request, 'account_confirm.html')
+    
 
  #   greeting = Greeting()
   #  greeting.save()
