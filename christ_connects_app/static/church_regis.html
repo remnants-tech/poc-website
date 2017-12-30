@@ -5,10 +5,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <div class="signupSection">
   <div class="info">
-    <h2>Sign up</h2>
+    <h2>Church Sign up</h2>
   </div>
 
-<form class="signupForm" action="/sign_up" method="post"> {% csrf_token %}
+<form class="signupForm" action="/church_sign_up" method="post"> {% csrf_token %}
     <div class="input_format">
     <input id="email" type="text" placeholder="Enter Email" name="Email" required>
     <p id= "email_msg"> </p>
@@ -23,7 +23,7 @@
     <label id="church_label"><b>Which church you serve?</b></label><br>
     <select id="church_drop" name="ChurchID">
     </select>
-    <div id= "add_church"> You don't see your church? Register your church <a id="church_link"> here </a>
+    <div id= "add_church"> You don't see your church? Register your church <a id="here_link" href="#"> here </a>
     </div>
     <br>
     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p><br>
@@ -33,17 +33,6 @@
   <button id="cancel_btn" type="button">Cancel</button>
   </form>
 </div>
-
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
-  </div>
-
-</div>
-
 <script type= 'text/javascript' src="/static/church_drop.js"></script>
 <script type='text/javascript' src="/static/log-in.js"></script>
 {% endblock %}

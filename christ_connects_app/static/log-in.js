@@ -10,6 +10,11 @@ var cancel_btn_id = document.getElementById("cancel_btn")
 var username_msg_id = document.getElementById("user_id_msg")
 var email_msg_id = document.getElementById("email_msg")
 var user_fm_id = document.getElementsByClassName("signupForm")
+var dob_id = document.getElementById("birth_date")
+var church_here_link = document.getElementById("church_link")
+var church_reg_modal = document.getElementById('church_modal');
+
+
 var sign_up_callback = (data) => {
   if (data ==="Username already exists"){
     $(username_msg_id).text(data)
@@ -55,4 +60,16 @@ $(sign_btn_id).on("click", function(event){
         success: sign_up_callback
       })
   };
+});
+
+$(birth_date).datepicker({
+  yearRange: "1900:2017",
+  showOtherMonths: true,
+  selectOtherMonths: true,
+  changeMonth: true,
+  changeYear: true
+});
+
+$(church_here_link).click(() => {
+  modal.style.display = "block";
 });

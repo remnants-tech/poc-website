@@ -1,0 +1,11 @@
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+
+#home_btn {
+  text-decoration: none;
+  font-size: 15px;
+  color: grey;
+  padding-top: 30px;
+}

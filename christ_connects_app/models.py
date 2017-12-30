@@ -31,7 +31,7 @@ class Profile(object):
                 profile_dict[profile_key] = profile_val
         #add date and time created 
         time_stamp = time.strftime('%Y/%m/%d %H:%M:%S', time.gmtime())
-        profile_dict['DateCreated'] = time_stamp
+        profile_dict['date_created'] = time_stamp
         
         for attribute in profile_dict:
             setattr(self,attribute,profile_dict[attribute])
@@ -114,13 +114,30 @@ class UserProfileDao(BaseDao):
             return True
         else:
             return False
-    
-    
+    def saveUser(self,userInfo):
+        self.updateInfo()
+        self.enableDao()
+        self.dao.initiateConn()
+        if (self.dao.checkDuplicate("ID",self.ID)):
+            return ('Username already exists')
+        if (self.dao.checkDuplicate("Email",self.Email)):
+            return ('Email already exists')
+        self.dao.storeInfo(self.__dict__)
+        self.dao.commit()
+        self.dao.close()
+        return ('User successfully created')
 
 
 class ChurchProfile(Profile):
     def enableDao(self):
-        setattr(self,'dao',UserProfileDao())
+        setattr(self,'dao',ChurchProfileDao())
+    def saveChurch(self):
+        self.updateInfo()
+        self.enableDao()
+        self.dao.initiateConn()
+        self.dao.storeInfo(self.__dict__)
+        self.dao.commit()
+        self.dao.close()
     
 class ChurchProfileDao(BaseDao):
     def storeInfo(self, userDict):
@@ -132,30 +149,31 @@ class ChurchProfileDao(BaseDao):
         for attribute in userDict:
             if attribute not in attributeExcluded:
                 queryCol += '"' + attribute + '",'
-                if attribute.find('ID') > -1:
+                if attribute.find('id') > -1:
                     userDict[attribute] = userDict[attribute][:-1]
                 queryVal.append(userDict[attribute])
         
         queryCol = queryCol[:-1] + ') values %s'
+        print (queryCol)
+        print (queryVal)
         self.cur.execute(queryCol,
                             (tuple(queryVal),))    
     def pullChurchName(self):
         self.cur.execute('select church_pk, name from tblchurch')
-        name_list = [{row[0]:row[1]} for row in self.cur.fetchall()]
-        return name_list
+        church_dict = {}
+        for row in self.cur.fetchall():
+            church_dict[row[0]]= row[1]
+        return church_dict
+    
+
+        
 
     
 
     
 
 def testMain():
-    sampleUser = 'FirstName=djangotest&LastName=123&ID=jaewonrt&Pass=remnant&Email=jaewonrt@gmail.com'
-    sampleUser = UserProfile(sampleUser)
-    sampleUser.updateInfo()
-    sampleUser.enableDao()
-    sampleUser.dao.initiateConn()
-    sampleUser.dao.storeInfo(sampleUser.__dict__)
-    sampleUser.dao.close()
-
-            
+    newChurch = 'name=Connecticut Church'
+    newChurch = ChurchProfile(newChurch)
+    newChurch.saveChurch()
         
