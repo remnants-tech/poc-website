@@ -2,4 +2,38 @@
 {% load staticfiles %}
 
 {% block content %}
+  <div class= "container-fluid">
+    <div id="main_carousel" class="carousel slide" data-ride="carousel" data-interval="7000">
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="/static/main_img.png" class= "img-responsive" alt="img 1">
+        </div>
+
+        <div class="item">
+          <img src="/static/RCA_sample_registration.png" class= "img-responsive" alt="img 2" >
+        </div>
+
+        <div class="item">
+          <img src="/static/pastor_ryu.jpg" class= "img-responsive" alt="img 3" >
+        </div>
+        <div class="item">
+          <img src="/static/praying_img.jpg" class= "img-responsive" alt="img 4" >
+        </div>
+      </div>
+      <ol class="carousel-indicators">
+        <li data-target="#main_carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#main_carousel" data-slide-to="1"></li>
+        <li data-target="#main_carousel" data-slide-to="2"></li>
+        <li data-target="#main_carousel" data-slide-to="3"></li>
+      </ol>
+    </div>
+  </div>
+
+  <div id= "announcement_container" class="container">
+    <p class="h2">Important Announcements <small class="text-muted">Stay tuned for important events</small>
+    </p>
+    <p class="h4">16 Simon Peter answered, “You are the Messiah, the Son of the living God.”17 Jesus replied, “Blessed are you, Simon son of Jonah, for this was not revealed to you by flesh and blood, but by my Father in heaven. 18 And I tell you that you are Peter,[b] and on this rock I will build my church, and the gates of Hades[c] will not overcome it. 19 I will give you the keys of the kingdom of heaven; whatever you bind on earth will be[d] bound in heaven, and whatever you loose on earth will be loosed in heaven.” 20 Then he ordered his disciples not to tell anyone that he was the Messiah.
+    </p>
+  </div>
 {% endblock %}

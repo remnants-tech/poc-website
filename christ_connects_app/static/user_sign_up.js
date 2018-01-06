@@ -62,13 +62,10 @@ $(sign_btn_id).on("click", function(event){
   };
 });
 
-$(birth_date).datepicker({
-  yearRange: "1900:2017",
-  showOtherMonths: true,
-  selectOtherMonths: true,
-  changeMonth: true,
-  changeYear: true,
-  orientation: "bottom auto"
+$('#birth_date').datepicker({
+  orientation: "bottom auto",
+  defaultViewDate: { year: 1980, month: 01, day: 01 },
+  autoclose: true
 });
 
 $(church_here_link).click(() => {

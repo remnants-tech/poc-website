@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet" type="text/css" href="/static/user_sign_up.css">
+<div class="row">
+  <p class="text-center sign_up_msg"> Welcome! Sign up here </p>
+</div>
+  <form class="signupForm" action="/sign_up" method="post"> {% csrf_token %}
+    <div class="input_format">
+      <input id="email" type="text" placeholder="Enter Email" name="Email" required>
+      <p id= "email_msg"> </p>
+      <input id="user_id" type="text" placeholder="Create Username" name="ID" required>
+      <p id= "user_id_msg"> </p><br>
+      <input id= 'pass' type="password" placeholder="Enter Password" name="Pass" required><br>
+      <input id= 'pass_repeat' type="password" placeholder="Repeat Password" name="Pass-repeat" required>
+      <p id= 'pass_error_msg'> </p>
+      <input id="first_name" type="text" placeholder="Enter First Name" name="FirstName" required>
+      <input id="last_name" type="text" placeholder="Enter Last Name" name="LastName" required>
+      <input type="text" id="birth_date" placeholder="Enter Your Date of Birth" name="DOB" required> <br>
+      <label id="church_label"><b>Which church you serve?</b></label><br>
+      <select id="church_drop" name="ChurchID">
+      </select>
+      <div class= "text-center" id= "add_church"> You don't see your church? Register your church <a id="church_link"> here </a>
+      </div>
+      <br>
+      <p class= "text-center">By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p><br>
+      <div id="error_msg"> </div>
+      <div class="center-block sign_up_btn_wrap">
+        <button id="sign-up_btn" type="button" class="sign_up_btn">Sign Up</button>
+        <button id="cancel_btn" type="button" class="sign_up_btn">Cancel</button>
+      </div>
+
+
+  </div>
+  </form>
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+</div>
+<script type= 'text/javascript' src="/static/church_drop.js"></script>
+<script type='text/javascript' src="/static/user_sign_up.js"></script>
+
+{% endblock %}

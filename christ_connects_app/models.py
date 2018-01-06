@@ -31,7 +31,7 @@ class Profile(object):
                 profile_dict[profile_key] = profile_val
         #add date and time created 
         time_stamp = time.strftime('%Y/%m/%d %H:%M:%S', time.gmtime())
-        profile_dict['date_created'] = time_stamp
+        profile_dict['DateCreated'] = time_stamp
         
         for attribute in profile_dict:
             setattr(self,attribute,profile_dict[attribute])
@@ -48,7 +48,20 @@ class Profile(object):
 class UserProfile(Profile):
     def enableDao(self):
         setattr(self,'dao',UserProfileDao())
-    
+        
+    def saveUser(self):
+        self.updateInfo()
+        self.enableDao()
+        self.dao.initiateConn()
+        if (self.dao.checkDuplicate("ID",self.ID)):
+            return ('Username already exists')
+        if (self.dao.checkDuplicate("Email",self.Email)):
+            return ('Email already exists')
+        self.dao.storeInfo(self.__dict__)
+        self.dao.commit()
+        self.dao.close()
+        return ('User successfully created')
+
 class BaseDao(object):
     def initiateConn(self):
         urllib.parse.uses_netloc.append("postgres")
@@ -114,18 +127,6 @@ class UserProfileDao(BaseDao):
             return True
         else:
             return False
-    def saveUser(self,userInfo):
-        self.updateInfo()
-        self.enableDao()
-        self.dao.initiateConn()
-        if (self.dao.checkDuplicate("ID",self.ID)):
-            return ('Username already exists')
-        if (self.dao.checkDuplicate("Email",self.Email)):
-            return ('Email already exists')
-        self.dao.storeInfo(self.__dict__)
-        self.dao.commit()
-        self.dao.close()
-        return ('User successfully created')
 
 
 class ChurchProfile(Profile):

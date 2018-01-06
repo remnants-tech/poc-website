@@ -1,0 +1,70 @@
+body {
+  background-color: #c0eaff
+}
+
+
+.log_in_msg {
+  margin-top: 80px;
+  font-size: 170% ;
+  color: white;
+  font-weight: bold;
+  text-shadow: .25px .5px 3px #999
+}
+
+.center-block {
+  margin-top: 20px;
+  width: 70%;
+  height: 300px;
+  background-color: snow;
+  box-shadow: 0 1px 4px 0 #aeabab
+}
+
+.row {
+  margin: 0;
+}
+
+@media (min-width:48.1em) {
+  .center-block {
+    height: 400px;
+    width: 25%;
+    font-size: 120%;
+  }
+  .log_in_msg {
+    font-size: 250%;
+  }
+  .form-control {
+    font-size: 110%;
+    height: 150%;
+  }
+  .bottom_msg {
+    padding-top: 80px;
+  }
+}
+
+
+.log-in-header {
+  margin-top: 5px;
+  font-size: 150%;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border: .5px solid #80808052;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.form-group {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.btn {
+  width: 80%;
+  font-size: 120%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.bottom_msg {
+  margin-top: 50px;
+}

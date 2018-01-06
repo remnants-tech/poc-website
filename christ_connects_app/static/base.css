@@ -1,58 +1,132 @@
-#log-in_button {
-  position: absolute; top: 50; right:0;
-  background-color: #FFFFFF; /* Green */
-  border: none;
-  color: gray;
-  padding: 30px 160px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+.img {
+  max-width: 100%;
+  height: auto;
 }
-
-#log-in_link {
-  text-decoration: none;
-  color:gray;
+body {
+  padding-top: 3.6em;
 }
 
 
-#feedback_button {
-  position: absolute; top:50; right: 0; left:100;
-  background-color: #FFFFFF; /* Green */
-  border: none;
-  color: gray;
-  padding: 30px 40px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+.navbar {
+  background-color: white;
+  border-color: #6a7ec9;
 }
 
 
-ul {
-  text-decoration: none;
-  background-color: #ffedcc;
-  padding: 10px 80px;
-  margin-top: 160px;
-  margin-left: 0px;
+
+.navbar-toggle {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-li {
-  text-decoration: none;
-  display: inline;
-  margin-left: 100px;
-  font: 20px arial, sans-serif;
-  color: black;
-  font-weight: 1000;
+#navbar_brand_text {
+  float: right;
+  margin-top: 10px;
+  font-size: 170%;
+  font-weight:600
 }
 
-#menu_list {
-  color: black;
-  text-decoration: underline;
-  text-decoration-color: #ff4500;
+
+.img-responsive {
+  display:inline;
 }
 
-a:hover {
-  text-decoration: underline;
-  text-decoration-color: black;
+#home_btn:hover, #about_btn:hover, #news_btn:hover, #church_btn:hover, #resources_btn:hover, #log_in_btn:hover, #contact_us_btn:hover {
+  transition-duration: .4s;
+  background-color: #f9f9f9;
+}
+
+#home_btn, #about_btn, #news_btn, #church_btn, #resources_btn, #log_in_btn, #contact_us_btn {
+    margin-right: 10px;
+    padding-top: 25px;
+    padding-bottom:25px;
+    font-size: 130%;
+}
+
+
+.dropdown .dropdown-menu {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+
+    max-height: 0;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    font-size: 130%;
+    left: 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    width: 200px;
+}
+
+.dropdown.open .dropdown-menu {
+    max-height: 300px;
+    opacity: 1;
+}
+
+
+#nav-menu {
+  margin-right: 0px;
+}
+
+.container-fluid {
+  padding: 0px;
+  margin-top:10px;
+}
+.item {
+  height: 600px;
+}
+
+.carousel-indicators {
+  bottom: -35px;
+}
+
+.carousel-indicators li {
+  border-color: #286090;
+}
+
+.carousel-indicators .active {
+  background-color: #d9edf7 ;
+}
+.carousel-inner {
+   margin-bottom: 20px;
+}
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    width: 100%;
+}
+
+.h2 {
+  font-weight: 600;
+}
+
+#announcement_container {
+  margin-top: 30px;
+  border: 1px solid gray;
+  padding-bottom: 100px;
+}
+
+@media (max-width: 48em) {
+  #navbar_brand_text {
+    font-size: 120%;
+  }
+  #about_btn, #news_btn, #church_btn, #resources_btn, #log_in_btn, #contact_us_btn {
+    margin-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 120%;
+  }
+  .carousel-inner {
+    height: 200px;
+  }
+  .h2 {
+    font-size: 100%
+  }
+  .h4 {
+    font-size: 100%
+  }
 }

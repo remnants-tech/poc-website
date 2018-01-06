@@ -1,53 +1,36 @@
-/*@import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
-* {
-  font-family: 'Open Sans', sans-serif;
+body {
+  background-color: #c0eaff
 }
-*/
 
+.sign_up_msg {
+  margin-top: 80px;
+  font-size: 170% ;
+  color: white;
+  font-weight: bold;
+  text-shadow: .25px .5px 3px #999
+}
 
-.signupSection {
-  background-repeat: no-repeat;
-  margin: auto;
+.signupForm {
+  padding: 30px 10;
+  background: white;
+  margin:auto;
+  margin-top: 60px;
   position: relative;
-  top: 50px;
-  width: 70%;
-  height: 700px;
+  width: 85%;
+  height: 800px;
   text-align: center;
   display: flex;
   color: black;
   box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, .2);
-  margin-bottom: 100px;
-}
+  margin-bottom: 120px;
 
-.info {
-  font-size: 25px;
-  color: white;
-  font-family: Verdana;
-  width: 45%;
-  background: #ffc966;
-  padding: 40px 0;
-  border-right: 2px solid rgba(30, 30, 30, .8);
-  h2 {
-    padding-top: 30px;
-    font-weight: 300;
-  }
-}
-
-.signupForm {
-  font: black;
-  font-family: verdana;
-  width: 70%;
-  padding: 30px 0;
-  background: white;
-  transition: .2s;
-  color: black;
 }
 
 .input_format {
   margin: 10px 0;
   font-size: 12px;
   padding: 10px 30px;
-  width: 80%;
+  width: 100%;
   border-top: none;
   border-left: none;
   border-right: none;
@@ -57,7 +40,7 @@
 }
 
 input{
-    width: 90%;
+    width: 100%;
     padding: 10px 20px;
     margin: 5px 0px;
     border-top: none;
@@ -67,65 +50,12 @@ input{
     outline: none;
 }
 
-#name_input {
-  width: 36.5%;
-}
 
 #pass_error_msg {
   font-size: 10px;
 }
 
-.ui-datepicker {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  font-family: verdana;
-  border-radius: 8px 8px 3px 3px;
-  background-color:#fdfdfd;
-}
 
-.ui-datepicker-header {
-  background-color: #3d9cee;
-  color:white;
-  text-align:center;
-  font-family: verdana;
-  height:30px;
-  border-radius:8px 8px 0px 0px;
-  text-decoration: none;
-  padding-top: 10px;
-}
-
-.ui-datepicker-title{
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.ui-datepicker-prev {
-  float: left;
-  margin: 0 30px;
-}
-
-.ui-datepicker-next {
-  float: right;
-  margin: 0 30px;
-}
-
-
-
-.ui-datepicker-calendar {
-    text-align:center;
-    padding:8px;
-}
-.ui-datepicker-calendar th {
-  padding:10px;
-}
-
-
-.ui-datepicker-calendar .ui-state-default {
-  text-decoration:none;
-  color:black;
-}
-.ui-datepicker-calendar .ui-state-active {
-    color: #2196f3;
-}
 
 
 #church_label {
@@ -183,7 +113,7 @@ select {
   margin-bottom: 20px;
 }
 
-button {
+.sign_up_btn {
   background-color: white;
   font-size: 15px;
   transition-duration: 0.2s;
@@ -192,13 +122,24 @@ button {
   margin-top:20px;
   margin-bottom:10px;
   padding: 5px 5px;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
-button:hover {
+.sign_up_btn:hover {
   background-color: #e7e7e7;
 }
 
-#cancel_btn {
-  margin-right: 50px;
+.row {
+  margin:0;
+}
+
+@media (min-width:48.1em){
+  .signupForm {
+    width: 30%
+  }
+  .input_format {
+    width: 80%
+    margin-left: 10%;
+  }
 }

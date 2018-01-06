@@ -9,11 +9,14 @@ def index(request):
     return render(request, 'index.html')
 
 def log_in(request):
-    return render(request, 'log-in.html')
+    return render(request, 'log_in.html')
 
 def sign_up(userInfo):
     newUser = UserProfile(userInfo.body)
-    newUser.saveUser()
+    return HttpResponse(newUser.saveUser())
+
+def user_sign_up(request):
+    return render(request, 'user_sign_up.html')
     
 
 def pull_churches(request):
