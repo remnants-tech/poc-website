@@ -1,0 +1,20 @@
+#map {
+  width: 70%;
+  height: 400px;
+  background-color: grey;
+}
+
+#search_name_fm {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+#church_search_results {
+  margin-bottom: 20px;
+}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+<link rel="stylesheet" type="text/css" href="/static/church_lookup.css">
+<p class="h3"> Look up churches </p>
+<p class="h4"> Search churches by name, address, and other categories </p>
+
+<div class="container">
+  <form class = "row" id= "search_by_state" action="/search_church_criteria" method= "post"> {% csrf_token %}
+    <div class= "btn-group">
+      <button id="state_dropdown_bar" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Search by State <span class="caret"></span></button>
+        <ul id="state_drop_ul" class="dropdown-menu scrollable-menu" role="menu">
+        </ul>
+      </button>
+    </div>
+  </form>
+
+  <form class= "row" id="search_name_fm" action="/search_church_criteria" method="post"> {% csrf_token %}
+    <div class="input-group col-md-6">
+      <input id="search_name_input" type="text" class="form-control input-md" placeholder="Search church name" name="name"/>
+      <span class="input-group-btn">
+          <button class="btn btn-info btn-md" type="button" id="search_input_btn">
+              <i class="glyphicon glyphicon-search"></i>
+          </button>
+      </span>
+    </div>
+  </form>
+  <div class="row">
+    <p class= "h5" id="church_search_results"></p>
+    <p class= "h5" id="add_church_search_results"></p>
+  </div>
+  <div class= "row">
+    <div id="map"></div>
+  </div>
+</div>
+<script>
+  function initMap() {
+    dc = {lat: 38.889931, lng: -77.009003};
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: dc
+    });
+    marker = new google.maps.Marker({
+      position: dc,
+      map: map
+    });
+    infowindow = new google.maps.InfoWindow({
+      content: '<div id="content"></div>'
+    });
+  }
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtf72Goqp4Tuqoxi1S5i-kLEBfF3Wsz9E&callback=initMap">
+    </script>
+<script defer type= 'text/javascript' src="/static/church_lookup.js"></script>
+
+{% endblock %}

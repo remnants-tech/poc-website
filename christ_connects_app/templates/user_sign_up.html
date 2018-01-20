@@ -10,20 +10,20 @@
 </div>
   <form class="signupForm" action="/sign_up" method="post"> {% csrf_token %}
     <div class="input_format">
-      <input id="email" type="text" placeholder="Enter Email" name="Email" required>
+      <input id="email" type="text" placeholder="Enter Email" name="email" required>
       <p id= "email_msg"> </p>
-      <input id="user_id" type="text" placeholder="Create Username" name="ID" required>
+      <input id="user_id" type="text" placeholder="Create Username" name="id" required>
       <p id= "user_id_msg"> </p><br>
-      <input id= 'pass' type="password" placeholder="Enter Password" name="Pass" required><br>
-      <input id= 'pass_repeat' type="password" placeholder="Repeat Password" name="Pass-repeat" required>
+      <input id= 'pass' type="password" placeholder="Enter Password" name="pass" required><br>
+      <input id= 'pass_repeat' type="password" placeholder="Repeat Password" name="pass-repeat" required>
       <p id= 'pass_error_msg'> </p>
-      <input id="first_name" type="text" placeholder="Enter First Name" name="FirstName" required>
-      <input id="last_name" type="text" placeholder="Enter Last Name" name="LastName" required>
-      <input type="text" id="birth_date" placeholder="Enter Your Date of Birth" name="DOB" required> <br>
+      <input id="first_name" type="text" placeholder="Enter First Name" name="first_name" required>
+      <input id="last_name" type="text" placeholder="Enter Last Name" name="last_name" required>
+      <input type="text" id="birth_date" placeholder="Enter Your Date of Birth" name="dob" required> <br>
       <label id="church_label"><b>Which church you serve?</b></label><br>
-      <select id="church_drop" name="ChurchID">
+      <select  id="church_drop" name="church_id">
       </select>
-      <div class= "text-center" id= "add_church"> You don't see your church? Register your church <a id="church_link"> here </a>
+      <div class= "text-center" id= "add_church"> You don't see your church? Register your church <a data-toggle="modal" data-target="#church_modal"> here </a>
       </div>
       <br>
       <p class= "text-center">By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p><br>
@@ -32,17 +32,37 @@
         <button id="sign-up_btn" type="button" class="sign_up_btn">Sign Up</button>
         <button id="cancel_btn" type="button" class="sign_up_btn">Cancel</button>
       </div>
-
-
   </div>
   </form>
+<div class="container">
+  <div class="modal fade" id="church_modal" role="dialog" data-backdrop="false">
+    <div class="modal-dialog">
 
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
+      <!-- Modal content-->
+      <form class="modal-content"> {% csrf_token %}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Register Your Church</h4>
+        </div>
+        <div class="modal-body" id="modal_id">
+          <input class="form-control" type="text" placeholder="Enter Church Name" name="name" required>
+          <a type="button" data-toggle="collapse" data-target="#modal_collapsed_content">Know the church address? Click here to enter</a>
+          <div id="modal_collapsed_content" class= "collapse">
+            <input class="form-control" type="text" placeholder="Street Address" name="street_address">
+            <input class="form-control" type="text" placeholder="Apt/Suite Number" name="apt_suite">
+            <input class="form-control" type="text" placeholder="City" name="city">
+            <select id="state_drop" placeholder="select state" class="form-control" name="state"></select>
+            <input class="form-control" type="text" placeholder="Country" name="country">
+            <input class="form-control" type="text" placeholder="Phone Number" name="phone_id">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <p class="text-center" id="modal_msg"></p>
+          <button id="church_reg_submit" type="button" class= "btn btn-default">Submit</button>
+          <button id="church_reg_close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 <script type= 'text/javascript' src="/static/church_drop.js"></script>

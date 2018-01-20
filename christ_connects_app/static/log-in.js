@@ -1,76 +1,43 @@
-var pass_id = document.getElementById("pass");
-var pass_repeat_id = document.getElementById("pass_repeat");
-var pass_error_id = document.getElementById("pass_error_msg");
-var pass_input;
-var pass_repeat_input;
-var pass_ids = document.querySelectorAll("#pass, #pass_repeat")
-var error_msg_id = document.getElementById("error_msg")
-var sign_btn_id = document.getElementById("sign-up_btn")
-var cancel_btn_id = document.getElementById("cancel_btn")
-var username_msg_id = document.getElementById("user_id_msg")
-var email_msg_id = document.getElementById("email_msg")
-var user_fm_id = document.getElementsByClassName("signupForm")
-var dob_id = document.getElementById("birth_date")
-var church_here_link = document.getElementById("church_link")
-var church_reg_modal = document.getElementById('church_modal');
+var login_form_class = document.getElementsByClassName("login_form");
+var login_btn_id = document.getElementById("login_btn");
+var username_id = document.getElementById("username");
+var password_id = document.getElementById("pass");
+var login_alert = document.getElementById("login_success");
 
-
-var sign_up_callback = (data) => {
-  if (data ==="Username already exists"){
-    $(username_msg_id).text(data)
-  }
-  else if (data === "Email already exists"){
-    $(email_msg_id).text(data)
-  }
-  else {
-    window.location.href="account_confirm"
-  }
-};
-
-$(pass_ids).keyup(function(event){
-  pass_input = $(pass_id).val();
-  pass_repeat_input = $(pass_repeat_id).val();
-  //this is for comparing pass with repeat pass
-  if (pass_input !== pass_repeat_input) {
-    $(pass_error_id).css({'color': 'red'});
-    $(pass_error_id).text("password and repeat password don't match");
-  }
-  else {
-    $(pass_error_id).css({'color': 'green'});
-    $(pass_error_id).text("password and repeat password match");
-  };
+//first disable form submit via enter key and enable enter key for password or username bar
+$(login_form_class).keypress(
+    (event) => {
+     if (event.which == '13') {
+        event.preventDefault();
+      }
 });
 
-
-$(sign_btn_id).on("click", function(event){
-  //this is making sure pass is at least 8 characters long
-  if (pass_input.length < 8) {
-    $(pass_error_id).css({'color': 'red'})
-    $(pass_error_id).text("your password needs to be more than 8 characters");
+$(username_id).keypress(
+  (event) => {
+    if (event.which == '13') {
+       $(login_btn_id).click();
+     }
   }
-  else if (pass_input !== pass_repeat_input){
-    $(pass_error_id).css({'color': 'red'})
-    $(pass_error_id).text("please check your information");
+)
+
+$(password_id).keypress(
+  (event) => {
+    if (event.which == '13') {
+       $(login_btn_id).click();
+     }
   }
-  else {
-      $.ajax({
-        url:"/sign_up",
-        type:"POST",
-        data: $(user_fm_id).serialize(),
-        success: sign_up_callback
-      })
-  };
-});
+)
 
-$(birth_date).datepicker({
-  yearRange: "1900:2017",
-  showOtherMonths: true,
-  selectOtherMonths: true,
-  changeMonth: true,
-  changeYear: true,
-  orientation: "bottom auto"
-});
+//ajax post for authenticating the user
 
-$(church_here_link).click(() => {
-  modal.style.display = "block";
-});
+$(login_btn_id).click(function() {
+  $.ajax({
+    url:"/user_authentication",
+    type:"POST",
+    data: $(login_form_class).serialize(),
+    success: (login_auth_result) => {
+      $(login_alert).text("signed in successfully");
+      $(".alert").alert()
+    }
+  })
+})

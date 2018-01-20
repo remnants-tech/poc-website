@@ -10,17 +10,19 @@
     <div class="center-block">
       <div class= "row log_in_input">
         <p class="text-center log-in-header">User Log In</p>
-        <div class="form-group">
-          <input type="text" class="form-control text-center" id="username" placeholder="Enter Username" name="username">
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control text-center" id="pass" placeholder="Enter Password" name="password">
-        </div>
+          <form class="login_form" action="/user_authentication" method="post"> {% csrf_token %}
+            <div class="form-group">
+              <input type="text" class="form-control text-center" id="username" placeholder="Enter Username" name="id">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control text-center" id="pass" placeholder="Enter Password" name="pass">
+            </div>
 
-      </div>
-      <div class= "row">
-        <button type="button" class="btn btn-primary btn-block">Log In</button>
-      </div>
+          </div>
+          <div class= "row">
+            <button id="login_btn" type="button" class="btn btn-primary btn-block">Log In</button>
+          </div>
+        </form>
       <div class="row bottom_msg">
         <p class="text-center"> Don't have an account yet? <a href="/user_sign_up"> sign up </a> </p>
         <p class="text-center"> Log into church account? <a> here </a> </p>
@@ -28,4 +30,11 @@
     </div>
 
   </div>
+  <div id="login_success" class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+  <script type='text/javascript' src="/static/log-in.js"></script>
 {% endblock %}

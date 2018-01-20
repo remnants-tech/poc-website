@@ -15,6 +15,8 @@ var church_here_link = document.getElementById("church_link")
 var church_reg_modal = document.getElementById('church_modal');
 
 
+
+
 var sign_up_callback = (data) => {
   if (data ==="Username already exists"){
     $(username_msg_id).text(data)
@@ -62,12 +64,8 @@ $(sign_btn_id).on("click", function(event){
   };
 });
 
-$('#birth_date').datepicker({
+$(dob_id).datepicker({
   orientation: "bottom auto",
   defaultViewDate: { year: 1980, month: 01, day: 01 },
   autoclose: true
-});
-
-$(church_here_link).click(() => {
-  modal.style.display = "block";
 });
