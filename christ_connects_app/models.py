@@ -69,7 +69,7 @@ class UserProfile(Profile):
 class BaseDao(object):
     def initiateConn(self):
         urllib.parse.uses_netloc.append("postgres")
-        url = urllib.parse.urlparse('postgres://ctomdacurckzmh:9296e40a59aacf97c93020e5f0b77e565f6e6f2cf9c0ec00a663b983216711d3@ec2-184-72-245-58.compute-1.amazonaws.com:5432/df0ehsr6unrr28')
+        url = urllib.parse.urlparse('removed db crendentials from this code because remnant tech is a public repo.')
         
         conn = psycopg2.connect(
             database=url.path[1:],
